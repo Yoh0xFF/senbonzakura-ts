@@ -1,0 +1,51 @@
+{
+  "name": "sakura",
+  "version": "1.0.0",
+  "description": "Programmint language",
+  "keywords": [],
+  "license": "MIT",
+  "author": "Ioram Gordadze <Yoh0xFF@gmail.com>",
+  "type": "commonjs",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "tsc",
+    "postbuild": "npx copyfiles ./package.json dist/",
+    "build:dev": "tsc --watch",
+    "clean": "npx rimraf ./dist ./node_modules --glob",
+    "format": "prettier --no-error-on-unmatched-pattern --write \"./*.{js,ts}\" && prettier --write package.json",
+    "git:clear": "git remote prune origin && git branch -vv | grep 'origin/.*: gone]' | awk '{print $1}' | xargs git branch -D",
+    "postinstall": "npm run pre-commit:init && npm run pre-commit:init-script && prettier --write package.json",
+    "pre-commit": "lint-staged",
+    "pre-commit:init": "husky init",
+    "pre-commit:init-script": "npx path-exists-cli .husky && echo \"npm run pre-commit\" > .husky/pre-commit",
+    "prepare": "husky",
+    "start": "npm run build && node dist/index.js",
+    "start:dev": "nodemon",
+    "test": "node --require ts-node/register --test src/**/*.test.ts",
+    "test:dev": "node --require ts-node/register --test --watch src/**/*.test.ts"
+  },
+  "lint-staged": {
+    "*.{js,jsx,mjs,cjs,ts,tsx,json,css,scss,md,html}": [
+      "prettier --write"
+    ]
+  },
+  "dependencies": {
+    "chalk": "4.1.2",
+    "dotenv": "16.4.5"
+  },
+  "devDependencies": {
+    "@types/node": "22.1.0",
+    "husky": "9.1.4",
+    "lint-staged": "15.2.8",
+    "nodemon": "3.1.4",
+    "prettier": "3.3.3",
+    "prettier-plugin-organize-imports": "4.0.0",
+    "prettier-plugin-packagejson": "2.5.1",
+    "ts-node": "10.9.2",
+    "typescript": "5.5.4"
+  },
+  "engines": {
+    "node": ">=18.0.0",
+    "npm": ">=10.0.0"
+  }
+}
