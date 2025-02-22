@@ -1,8 +1,13 @@
 {
   "name": "sakura",
   "version": "1.0.0",
-  "description": "Programmint language",
-  "keywords": [],
+  "description": "Programming language",
+  "keywords": [
+    "Compiler",
+    "Statically typed",
+    "WebAssembly",
+    "Learning"
+  ],
   "license": "MIT",
   "author": "Ioram Gordadze <Yoh0xFF@gmail.com>",
   "type": "commonjs",
