@@ -3,15 +3,15 @@
     "target": "ESNext",
     "useDefineForClassFields": true,
     "lib": ["ESNext"],
-    "module": "CommonJS",
+    "module": "NodeNext",
     "skipLibCheck": true,
     /* Bundler mode */
-    "moduleResolution": "node",
-    "allowImportingTsExtensions": false,
+    "moduleResolution": "nodenext",
+    "allowImportingTsExtensions": true,
     "resolveJsonModule": true,
     "isolatedModules": true,
     "declaration": true,
-    "noEmit": false,
+    "noEmit": true,
     "jsx": "react-jsx",
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
@@ -34,7 +34,10 @@
     /* output */
     "outDir": "./dist",
     /* Path alias */
-    "baseUrl": "./src"
+    "baseUrl": "./src",
+    "paths": {
+      "@root/*": ["./*"]
+    }
   },
   "include": ["src"],
   "exclude": ["node_modules", "dist"]

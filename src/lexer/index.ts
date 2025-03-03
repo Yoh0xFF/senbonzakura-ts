@@ -1,4 +1,4 @@
-import { InvalidExpression, Token, TokenType } from '../model';
+import { InvalidExpression, Token, TokenType } from '@root/model/index.ts';
 
 export class Lexer {
   private index: number;

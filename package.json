@@ -10,26 +10,23 @@
   ],
   "license": "MIT",
   "author": "Ioram Gordadze <Yoh0xFF@gmail.com>",
-  "type": "commonjs",
-  "main": "dist/index.js",
+  "type": "module",
+  "main": "dist/index.mjs",
   "scripts": {
-    "build": "tsc",
+    "build": "tsc && tsup",
     "build:dev": "tsc --watch",
-    "postbuild": "npx copyfiles ./package.json dist/",
     "clean": "npx rimraf ./dist ./node_modules --glob",
     "format": "prettier --no-error-on-unmatched-pattern --write \"./*.{js,ts}\" && prettier --write package.json",
     "git:clear": "git remote prune origin && git branch -vv | grep 'origin/.*: gone]' | awk '{print $1}' | xargs git branch -D",
-    "postinstall": "npm run pre-commit:init && npm run pre-commit:init-script && prettier --write package.json",
+    "postinstall": "husky init && npx path-exists-cli .husky && echo \"npm run pre-commit\" > .husky/pre-commit && prettier --write package.json",
     "npm:updates": "npx npm-check-updates",
     "npm:updates:apply": "npx npm-check-updates --target minor -u",
     "pre-commit": "lint-staged",
-    "pre-commit:init": "husky init",
-    "pre-commit:init-script": "npx path-exists-cli .husky && echo \"npm run pre-commit\" > .husky/pre-commit",
     "prepare": "husky",
-    "start": "npm run build && node dist/index.js",
-    "start:dev": "nodemon",
-    "test": "node --require ts-node/register --test src/**/*.test.ts",
-    "test:dev": "node --require ts-node/register --test --watch src/**/*.test.ts"
+    "start": "node dist/index.mjs",
+    "start:dev": "tsx --watch src/index.ts",
+    "test": "node --import tsx --test src/**/*.test.ts",
+    "test:dev": "node --import tsx --test --watch src/**/*.test.ts"
   },
   "lint-staged": {
     "*.{js,jsx,mjs,cjs,ts,tsx,json,css,scss,md,html}": [
@@ -37,19 +34,19 @@
     ]
   },
   "dependencies": {
-    "chalk": "4.1.2",
+    "chalk": "5.4.1",
     "dotenv": "16.4.7"
   },
   "devDependencies": {
-    "@types/node": "22.13.5",
+    "@types/node": "22.13.8",
     "husky": "9.1.7",
     "lint-staged": "15.4.3",
-    "nodemon": "3.1.9",
-    "prettier": "3.5.2",
+    "prettier": "3.5.3",
     "prettier-plugin-organize-imports": "4.1.0",
-    "prettier-plugin-packagejson": "2.5.8",
-    "ts-node": "10.9.2",
-    "typescript": "5.7.3"
+    "prettier-plugin-packagejson": "2.5.10",
+    "tsup": "8.4.0",
+    "tsx": "4.19.3",
+    "typescript": "5.8.2"
   },
   "engines": {
     "node": ">=18.0.0",
